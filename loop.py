@@ -6,30 +6,6 @@ import os
 import re
 import subprocess
 
-# 开启浏览器窗口(Chrome)
-driver = webdriver.Chrome()
-url = "https://rili.jin10.com/"
-driver.get(url)
-time.sleep(5)  # 增加等待时间，以确保页面完全加载
-
-# 指定输出文件名
-csv_file = "C:\\Users\\teter\\Desktop\\KaiPython\\金十\\loop.csv"
-
-# 如果文件已存在，先删除它
-if os.path.exists(csv_file):
-    os.remove(csv_file)
-
-# 找到时间元素并直接写入CSV文件
-with open(csv_file, 'w', newline='', encoding='utf-8-sig') as file:
-    writer = csv.writer(file)
-    writer.writerow(["时间"])  # 写入CSV文件的标题行
-    time_elements = driver.find_elements(By.CLASS_NAME, 'timer')
-    for time_element in time_elements:
-        writer.writerow([time_element.text])  # 直接写入每个元素的文本
-
-driver.quit()  # 关闭浏览器
-print("CSV文件已成功生成：", csv_file)
-
 
 csv_file = "loop.csv"
 with open(csv_file, newline='', encoding='utf-8-sig') as csvfile:
@@ -53,9 +29,18 @@ print(f"等待{wait_seconds}秒...")
 # 等待指定的时间
 time.sleep(wait_seconds)
 
-# 执行另一个程序或脚本
-print("執行loop")
-# 替换为您的实际文件路径
+# 執行finbert
+print("執行finbert")
 script_path = r"C:\Users\teter\Desktop\KaiPython\金十\finalfinbert.py"
 subprocess.run(["python", script_path])
 
+
+# 執行下一個timer
+print("執行timer")
+script_path = r"C:\Users\teter\Desktop\KaiPython\金十\timer.py"
+subprocess.run(["python", script_path])
+
+# 執行下一個loop
+print("執行loop")
+script_path = r"C:\Users\teter\Desktop\KaiPython\金十\loop.py"
+subprocess.run(["python", script_path])
